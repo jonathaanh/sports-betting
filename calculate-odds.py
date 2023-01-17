@@ -26,10 +26,10 @@ for match in data:
 					points.append(str(outcomes['point']))
 					# prices += outcomes['price']
 
-print(len(bookies))
-print(len(names))
-print(len(prices))
-print(len(points))
+# print(len(bookies))
+# print(len(names))
+# print(len(prices))
+# print(len(points))
 
 df['Team'] = names
 df['Bookie'] = bookies
