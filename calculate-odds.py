@@ -1,5 +1,11 @@
 import pandas as pd
 import json
+import os
+
+def notify(title, text):
+    os.system("""
+              osascript -e 'display notification "{}" with title "{}"'
+              """.format(text, title))
 
 with open("americanfootball_nfl.json", "r") as f:
 	data = json.load(f)
@@ -22,8 +28,8 @@ for match in data:
 				for outcomes in markets['outcomes']:
 					bookies.append(bookie['title'])
 					names.append(outcomes['name'])
-					prices.append(str(outcomes['price']))
-					points.append(str(outcomes['point']))
+					prices.append(outcomes['price'])
+					points.append(outcomes['point'])
 					# prices += outcomes['price']
 
 # print(len(bookies))
@@ -36,4 +42,14 @@ df['Bookie'] = bookies
 df['Price'] = prices
 df['Points'] = points
 
-print(df)
+# print(df)
+
+for index, row in df.iterrows():
+	if(row['Team'] == 'Dallas Cowboys'):
+		if(row['Points'] >= 3):
+			notify("Bet", "Cowboys +3")
+			break
+	if(row['Team'] == 'Tampa Bay Buccaneers'):
+		if(row['Points'] >= 8):
+			notify("Bet", "TB +8")
+			break
