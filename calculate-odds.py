@@ -4,28 +4,36 @@ import json
 with open("americanfootball_nfl.json", "r") as f:
 	data = json.load(f)
 
-df = pd.DataFrame(['Home Team', 'Away Team', 'bookie', 'key', 'Name', 'price'])
+df = pd.DataFrame(['Team', 'Bookie', 'Price', 'Point'])
 
-home_team = []
-away_team = []
 bookies = []
-keys = []
 names = []
 prices = []
+points = []
 
 for match in data:
 	# df['Home Team'] = match['home_team']
 	# df['Away Team'] = match['away_team']
-	for bookie in match['bookmakers']:
-		# df['bookie'] = bookie['title']
-		for markets in bookie['markets']:
-			# df['key'] = markets['key']
-			for outcomes in markets['outcomes']:
-				home_team += match['home_team']
-				away_team += match['away_team']
-				bookies = bookie['title']
-				keys += markets['key']
-				names += outcomes['name']
-				# prices += outcomes['price']
+	if match['home_team'] == 'Tampa Bay Buccaneers':
+		for bookie in match['bookmakers']:
+			# df['bookie'] = bookie['title']
+			for markets in bookie['markets']:
+				# df['key'] = markets['key']
+				for outcomes in markets['outcomes']:
+					bookies.append(bookie['title'])
+					names.append(outcomes['name'])
+					prices.append(str(outcomes['price']))
+					points.append(str(outcomes['point']))
+					# prices += outcomes['price']
+
+print(len(bookies))
+print(len(names))
+print(len(prices))
+print(len(points))
+
+df['Team'] = names
+df['Bookie'] = bookies
+df['Price'] = prices
+df['Points'] = points
 
 print(df)
