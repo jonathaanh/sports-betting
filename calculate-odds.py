@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-with open("json/americanfootball_nfl.json", "r") as f:
+with open("americanfootball_nfl.json", "r") as f:
 	data = json.load(f)
 
 df = pd.DataFrame(['Home Team', 'Away Team', 'bookie', 'key', 'Name', 'price'])

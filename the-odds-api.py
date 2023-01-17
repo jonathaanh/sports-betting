@@ -5,6 +5,7 @@ import json
 import os
 
 API_KEY = os.getenv('api_key')
+API_KEY = '6ed046c94f7627b7df3a69b3bd487d62'
 
 SPORT = 'americanfootball_nfl' # use 'upcoming' to see the next 8 games across all sports
 
