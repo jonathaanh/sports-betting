@@ -5,6 +5,11 @@ import json
 import os
 import time
 
+FAVOR_THRESHOLD = 0
+UNDERDOG_THRESHOLD = 7.5
+HOME_TEAM = 'Tampa Bay Buccaneers'
+AWAY_TEAM = 'Dallas Cowboys'
+
 while(True):
 	API_KEY = os.getenv('api_key')
 	API_KEY = '6ed046c94f7627b7df3a69b3bd487d62'
@@ -76,7 +81,7 @@ while(True):
 	for match in data:
 		# df['Home Team'] = match['home_team']
 		# df['Away Team'] = match['away_team']
-		if match['home_team'] == 'Tampa Bay Buccaneers':
+		if match['home_team'] == HOME_TEAM:
 			for bookie in match['bookmakers']:
 				# df['bookie'] = bookie['title']
 				for markets in bookie['markets']:
@@ -101,13 +106,13 @@ while(True):
 	print(df)
 
 	for index, row in df.iterrows():
-		if(row['Team'] == 'Dallas Cowboys'):
-			if(row['Points'] >= 3):
-				notify("Bet", "Cowboys +3")
+		if(row['Team'] == AWAY_TEAM):
+			if(row['Points'] >= FAVOR_THRESHOLD):
+				notify("Bet", "Cowboys: {}, Book: {}, Spread: {}".format(FAVOR_THRESHOLD, row['Bookie'], row['Points']))
 				break
-		if(row['Team'] == 'Tampa Bay Buccaneers'):
-			if(row['Points'] >= 8):
-				notify("Bet", "TB +8")
+		if(row['Team'] == HOME_TEAM):
+			if(row['Points'] >= UNDERDOG_THRESHOLD):
+				notify("Bet", "TB {}, Book {}, Spread {}".format(UNDERDOG_THRESHOLD, row['Bookie'], row['Points']))
 				break
 
 	time.sleep(60)

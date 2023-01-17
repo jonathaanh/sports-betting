@@ -1,0 +1,6 @@
+Arbitrage, Positive EV 
+Unit sizing (Kelly Criterion)
+Improve Notification
+Get pregame odds and compare to live odds
+
+Backtest 
