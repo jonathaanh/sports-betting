@@ -3,7 +3,7 @@ import time
 from plyer import notification
 
 # Set the API endpoint
-url = 'https://api.theoddsapi.com/v3/odds'
+url = 'https://api.the-odds-api.com/v4/sports/'
 
 # Set the API key
 api_key = 'c4dd4ffcdec88e0fd40ddd5836b98fd1'
