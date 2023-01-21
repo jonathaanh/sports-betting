@@ -5,16 +5,23 @@ import json
 import os
 import time
 
-FAVOR_THRESHOLD = 0
-UNDERDOG_THRESHOLD = 7.5
-HOME_TEAM = 'Tampa Bay Buccaneers'
-AWAY_TEAM = 'Dallas Cowboys'
+
+class Team:
+	def __init__(self, name, value):
+		self.name = name
+		self.value = value
+
+initial_spread_team = []
+initial_spread_names = []
+
+
+THRESHOLD = int(input("Input a threshold you want to check for between all NBA games."))
 
 while(True):
 	API_KEY = os.getenv('api_key')
 	API_KEY = '6ed046c94f7627b7df3a69b3bd487d62'
 
-	SPORT = 'americanfootball_nfl' # use 'upcoming' to see the next 8 games across all sports
+	SPORT = 'basketball_nba' # use 'upcoming' to see the next 8 games across all sports
 
 	REGIONS = 'us' # uk | us | eu | au
 
@@ -81,7 +88,6 @@ while(True):
 	for match in data:
 		# df['Home Team'] = match['home_team']
 		# df['Away Team'] = match['away_team']
-		if match['home_team'] == HOME_TEAM:
 			for bookie in match['bookmakers']:
 				# df['bookie'] = bookie['title']
 				for markets in bookie['markets']:
@@ -104,15 +110,20 @@ while(True):
 	df['Points'] = points
 
 	print(df)
+	
+	
 
 	for index, row in df.iterrows():
-		if(row['Team'] == AWAY_TEAM):
-			if(row['Points'] >= FAVOR_THRESHOLD):
-				notify("Bet", "Cowboys: {}, Book: {}, Spread: {}".format(FAVOR_THRESHOLD, row['Bookie'], row['Points']))
-				break
-		if(row['Team'] == HOME_TEAM):
-			if(row['Points'] >= UNDERDOG_THRESHOLD):
-				notify("Bet", "TB {}, Book {}, Spread {}".format(UNDERDOG_THRESHOLD, row['Bookie'], row['Points']))
-				break
+		if row['Team'] not in initial_spread_names:
+			newTeam = Team(row['Team'], row['Points'])
+			initial_spread_team.append(newTeam)
+			initial_spread_names.append(newTeam.name)
+		for team in initial_spread_team:
+			if row['Team'] == team.name:
+				if abs(row['Points'] - team.value) > THRESHOLD:
+					notify("Bet", "{}: {}, Book: {}, Spread: {}".format(team.name, THRESHOLD, row['Bookie'], row['Points']))
+					break
+					#notify("The spread difference has changed: {}".format((row['Points'] - team.value)))
 
-	time.sleep(60)
+
+time.sleep(60)
