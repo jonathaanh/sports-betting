@@ -4,3 +4,7 @@ Improve Notification
 Get pregame odds and compare to live odds
 
 Backtest 
+
+Goal:
+
+Sports Betting Tool
