@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 POINT_SPREAD = 6.5
+POINT_FACTOR = 2.0
 QUARTERS = 2
 SECOND_HALF_THRESHOLD = -1.5
 
@@ -39,7 +40,7 @@ grouped_df_home['2H Home Team up'] = grouped_df_home['Home Team final up'] - gro
 
 # grouped_df_home = grouped_df_home[grouped_df_home['HomeScore'] - grouped_df_home['PointSpread'] <= grouped_df_home['AwayScore']]
 
-grouped_df_home = grouped_df_home[(grouped_df_home['HomeScore'] - (POINT_SPREAD*2) >= (grouped_df_home['AwayScore']))]
+grouped_df_home = grouped_df_home[(grouped_df_home['HomeScore'] - (POINT_SPREAD*POINT_FACTOR) >= (grouped_df_home['AwayScore']))]
 
 print("Home Team Favored")
 print(grouped_df_home)
