@@ -3,12 +3,12 @@ import pandas as pd
 import numpy as np
 
 POINT_SPREAD = 6.5
-POINT_FACTOR = 1
+POINT_FACTOR = 1.5
 QUARTERS = 2
 SECOND_HALF_THRESHOLD = -1.5
 
-df1 = pd.read_csv("data/FantasyOdds.2022/Game.2022.csv")
-df2 = pd.read_csv("data/FantasyOdds.2022/Quarter.2022.csv")
+df1 = pd.read_csv("data/FantasyOdds.2022/Game.2023.csv")
+df2 = pd.read_csv("data/FantasyOdds.2022/Quarter.2023.csv")
 
 merged_df = pd.merge(df1, df2, on='GameID')
 
