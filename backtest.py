@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 POINT_SPREAD = 6.5
-POINT_FACTOR = 2.0
+POINT_FACTOR = 1
 QUARTERS = 2
 SECOND_HALF_THRESHOLD = -1.5
 
@@ -40,7 +40,7 @@ grouped_df_home['2H Home Team up'] = grouped_df_home['Home Team final up'] - gro
 
 # grouped_df_home = grouped_df_home[grouped_df_home['HomeScore'] - grouped_df_home['PointSpread'] <= grouped_df_home['AwayScore']]
 
-grouped_df_home = grouped_df_home[(grouped_df_home['HomeScore'] - (POINT_SPREAD*POINT_FACTOR) >= (grouped_df_home['AwayScore']))]
+grouped_df_home = grouped_df_home[(grouped_df_home['HomeScore'] + (grouped_df_home['PointSpread']*POINT_FACTOR) >= (grouped_df_home['AwayScore']))]
 
 print("Home Team Favored")
 print(grouped_df_home)
@@ -51,7 +51,7 @@ print("Away Team Favored")
 # print(grouped_df_home['second half diff'])
 
 
-print("2H Comeback Mean", grouped_df_home['2H Home Team up'].mean())
+print("2H Comeback Mean", grouped_df_home['2H Home Team up'].describe())
 #print("Away Mean", grouped_df_away['Away Team halftime up'].mean())
 
 #print("Home 2H Median", grouped_df_home['2H Home Team up'].median())
