@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 
 POINT_SPREAD = 7.0
-POINT_FACTOR = 2.0
+POINT_FACTOR = 1.0
 QUARTERS = 2
-SECOND_HALF_THRESHOLD = -1.5
+SECOND_HALF_THRESHOLD = -3.0
 
 game1 = pd.read_csv("data/FantasyOdds.2022/Game.2020.csv")
 game2 = pd.read_csv("data/FantasyOdds.2022/Game.2021.csv")
